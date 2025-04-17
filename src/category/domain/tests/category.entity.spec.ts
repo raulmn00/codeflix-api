@@ -1,4 +1,4 @@
-import { Category } from "./category.entity";
+import { Category } from "../category.entity";
 
 // TRIPLE AAA - Arrange, Act, Assert
 

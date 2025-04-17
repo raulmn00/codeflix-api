@@ -1,4 +1,3 @@
-
 export type CategoryConstructorProps = {
   categoryId?: string;
   name: string;
@@ -14,7 +13,7 @@ export type CategoryCreateCommand = {
 };
 
 export class Category {
-  categoryId?: string;
+  categoryId: string;
   name: string;
   description: string | null;
   isActive: boolean;
@@ -32,7 +31,6 @@ export class Category {
   static create(props: CategoryCreateCommand): Category {
     return new Category(props);
   }
-
 
   changeName(name: string): void {
     this.name = name;
