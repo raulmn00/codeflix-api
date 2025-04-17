@@ -4,7 +4,7 @@
   "description": "Micro Videos Admin",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
