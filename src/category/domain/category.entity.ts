@@ -1,8 +1,8 @@
-import { UUID } from "../../shared/domain/value-objects/uuid.vo";
+import { UUIDCustom } from "../../shared/domain/value-objects/uuid.vo";
 import { CategoryValidatorFactory } from "./category.validator";
 
 export type CategoryConstructorProps = {
-  categoryId?: UUID;
+  categoryId?: UUIDCustom;
   name: string;
   description?: string | null;
   isActive?: boolean;
@@ -16,14 +16,14 @@ export type CategoryCreateCommand = {
 };
 
 export class Category {
-  categoryId: UUID;
+  categoryId: UUIDCustom;
   name: string;
   description: string | null;
   isActive: boolean;
   createdAt: Date;
 
   constructor(props: CategoryConstructorProps) {
-    this.categoryId = props.categoryId ?? new UUID();
+    this.categoryId = props.categoryId ?? new UUIDCustom();
     this.name = props.name;
     this.description = props.description ?? null;
     this.isActive = props.isActive ?? true;

@@ -1,4 +1,4 @@
-import { UUID } from "../../../shared/domain/value-objects/uuid.vo";
+import { UUIDCustom } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity";
 
 // TRIPLE AAA - Arrange, Act, Assert
@@ -16,12 +16,12 @@ describe("Category Entity Unit Tests", () => {
       expect(category.description).toBe("Movie Description");
       expect(category.isActive).toBe(true);
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
     });
 
     test("should test the constructor with default values", () => {
       const category = new Category({
-        categoryId: new UUID(),
+        categoryId: new UUIDCustom(),
         name: "Movie 123",
         description: "Movie Description 123",
         isActive: false,
@@ -32,7 +32,7 @@ describe("Category Entity Unit Tests", () => {
       expect(category.description).toBe("Movie Description 123");
       expect(category.isActive).toBeFalsy();
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
     });
 
     test("should change a category name", () => {
@@ -46,7 +46,7 @@ describe("Category Entity Unit Tests", () => {
 
       expect(category.name).toBe("New Name");
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.description).toBe("Movie Description");
       expect(category.isActive).toBeTruthy();
     });
@@ -62,7 +62,7 @@ describe("Category Entity Unit Tests", () => {
 
       expect(category.description).toBe("New Description");
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.name).toBe("Movie");
       expect(category.isActive).toBeTruthy();
     });
@@ -78,7 +78,7 @@ describe("Category Entity Unit Tests", () => {
 
       expect(category.isActive).toBe(true);
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.description).toBe("Movie Description");
       expect(category.name).toBe("Movie");
     });
@@ -94,7 +94,7 @@ describe("Category Entity Unit Tests", () => {
 
       expect(category.isActive).toBeFalsy();
       expect(category.createdAt).toBeInstanceOf(Date);
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.description).toBe("Movie Description");
       expect(category.name).toBe("Movie");
     });
@@ -104,7 +104,7 @@ describe("Category Entity Unit Tests", () => {
     const arrange = [
       { categoryId: null },
       { categoryId: undefined },
-      { categoryId: new UUID() },
+      { categoryId: new UUIDCustom() },
     ];
 
     test.each(arrange)("id = %j", ({ categoryId }) => {
@@ -115,9 +115,9 @@ describe("Category Entity Unit Tests", () => {
         isActive: true,
       });
 
-      expect(category.categoryId).toBeInstanceOf(UUID);
+      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
 
-      if (categoryId instanceof UUID) {
+      if (categoryId instanceof UUIDCustom) {
         expect(category.categoryId).toBe(categoryId);
       }
     });
