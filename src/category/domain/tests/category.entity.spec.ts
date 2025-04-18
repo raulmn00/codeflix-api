@@ -1,9 +1,14 @@
+import { EntityValidationError } from "../../../shared/domain/validators/validation-error";
 import { UUIDCustom } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity";
 
 // TRIPLE AAA - Arrange, Act, Assert
 
 describe("Category Entity Unit Tests", () => {
+  let validateSpy: any;
+  beforeEach(() => {
+    validateSpy = jest.spyOn(Category, "validate");
+  });
   describe("constructor with default values", () => {
     test("should test the constructor", () => {
       const category = new Category({
@@ -49,6 +54,7 @@ describe("Category Entity Unit Tests", () => {
       expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.description).toBe("Movie Description");
       expect(category.isActive).toBeTruthy();
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
 
     test("should change a category description", () => {
@@ -65,6 +71,7 @@ describe("Category Entity Unit Tests", () => {
       expect(category.categoryId).toBeInstanceOf(UUIDCustom);
       expect(category.name).toBe("Movie");
       expect(category.isActive).toBeTruthy();
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
 
     test("should activate a category", () => {
@@ -119,6 +126,20 @@ describe("Category Entity Unit Tests", () => {
 
       if (categoryId instanceof UUIDCustom) {
         expect(category.categoryId).toBe(categoryId);
+      }
+    });
+  });
+});
+
+describe("Category Validator", () => {
+  describe("create command", () => {
+    it("should validate create command", () => {
+      try {
+        Category.create({
+          name: "",
+        });
+      } catch (error) {
+        console.log(error);
       }
     });
   });
