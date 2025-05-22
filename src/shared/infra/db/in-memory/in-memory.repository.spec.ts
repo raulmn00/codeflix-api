@@ -1,6 +1,7 @@
-import { Entity } from "../../domain/entity";
-import { ValueObject } from "../../domain/value-object";
-import { UUIDCustom } from "../../domain/value-objects/uuid.vo";
+import { Entity } from "../../../domain/entity";
+import { ValueObject } from "../../../domain/value-object";
+import { UUIDCustom } from "../../../domain/value-objects/uuid.vo";
+import { NotFoundError } from "../../../errors/not-found.error";
 import { InMemoryRepository } from "./in-memory.repository";
 
 type StubEntityConstructor = {
@@ -106,5 +107,51 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(items.length).toBe(2);
     expect(items[0]).toStrictEqual(entities[0]);
     expect(items[1]).toStrictEqual(entities[1]);
+  });
+
+  it("should update a entity", async () => {
+    const entity = new StubEntity({
+      entityId: new UUIDCustom(),
+      name: "name value",
+      price: 1,
+    });
+
+    await repository.create(entity);
+  });
+
+  it("should throw error when entity not found", async () => {
+    const entity = new StubEntity({
+      entityId: new UUIDCustom(),
+      name: "name value",
+      price: 1,
+    });
+
+    await expect(repository.update(entity)).rejects.toThrow(
+      new NotFoundError(entity.entityId, StubEntity)
+    );
+  });
+
+  it("should throw error when delete entity not found", async () => {
+    const uuid = new UUIDCustom();
+
+    await expect(repository.delete(uuid)).rejects.toThrow(
+      new NotFoundError(uuid, StubEntity)
+    );
+  });
+
+  it("should delete a entity", async () => {
+    const entity = new StubEntity({
+      entityId: new UUIDCustom(),
+      name: "name value",
+      price: 1,
+    });
+
+    await repository.create(entity);
+
+    await repository.delete(entity.entityId);
+
+    expect(repository.items.length).toBe(0);
+    expect(repository.items[0]).toBeUndefined();
+    expect(repository.items[1]).toBeUndefined();
   });
 });
