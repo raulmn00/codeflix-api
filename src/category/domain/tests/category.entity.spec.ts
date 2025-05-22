@@ -133,14 +133,81 @@ describe("Category Entity Unit Tests", () => {
 
 describe("Category Validator", () => {
   describe("create command", () => {
+    // maneira nao convencional de fazer
     it("should validate create command", () => {
-      try {
+      expect(() => {
+        Category.create({
+          name: null,
+        });
+      }).toThrow(
+        new EntityValidationError({
+          name: ["name should not be empty"],
+        })
+      );
+    });
+
+    it("should validate create command", () => {
+      expect(() => {
         Category.create({
           name: "",
         });
-      } catch (error) {
-        console.log(error);
-      }
+      }).toThrow(
+        new EntityValidationError({
+          name: ["name should not be empty"],
+          description: ["description should not be empty"],
+        })
+      );
+    });
+
+    it("should an invalid category with name property", () => {
+      expect(() => Category.create({ name: null })).constainsMessagesError({
+        name: [
+          "name should not be empty",
+          "name must be a string",
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+    });
+
+    it("should an invalid category with name property", () => {
+      expect(() => Category.create({ name: '' })).constainsMessagesError({
+        name: [
+          "name should not be empty",
+        ],
+      });
+    });
+
+    it("should an invalid category with name property", () => {
+      expect(() => Category.create({ name: 5 as any })).constainsMessagesError({
+        name: [
+          "name must be a string",
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+    });
+
+    it("should an invalid category with name property", () => {
+      expect(() => Category.create({ name: "t".repeat(256) })).constainsMessagesError({
+        name: [
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+    });
+
+    it("should an invalid category with description property", () => {
+      expect(() => Category.create({ name: 'teste', description: 5 as any })).constainsMessagesError({
+        description: [
+          "description must be a string",
+        ],
+      });
+    });
+
+    it("should an invalid category with description property", () => {
+      expect(() => Category.create({ name: 'teste', isActive: 5 as any })).constainsMessagesError({
+        isActive: [
+          "isActive must be a boolean value",
+        ],
+      });
     });
   });
 });
