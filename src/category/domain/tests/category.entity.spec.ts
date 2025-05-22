@@ -209,5 +209,24 @@ describe("Category Validator", () => {
         ],
       });
     });
+
+    it("should an invalid change category name", () => {
+      const category = Category.create({ name: 'teste' });
+      expect(() => category.changeName(5 as any)).constainsMessagesError({
+        name: [
+          "name must be a string",
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+    });
+
+    it("should an invalid change category name", () => {
+      const category = Category.create({ name: 'teste' });
+      expect(() => category.changeName('t'.repeat(256))).constainsMessagesError({
+        name: [
+          "name must be shorter than or equal to 255 characters",
+        ],
+      });
+    });
   });
 });
