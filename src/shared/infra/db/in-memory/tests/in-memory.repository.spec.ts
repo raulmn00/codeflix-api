@@ -1,8 +1,8 @@
-import { Entity } from "../../../domain/entity";
-import { ValueObject } from "../../../domain/value-object";
-import { UUIDCustom } from "../../../domain/value-objects/uuid.vo";
-import { NotFoundError } from "../../../errors/not-found.error";
-import { InMemoryRepository } from "./in-memory.repository";
+import { Entity } from "../../../../domain/entity";
+import { ValueObject } from "../../../../domain/value-object";
+import { UUIDCustom } from "../../../../domain/value-objects/uuid.vo";
+import { NotFoundError } from "../../../../errors/not-found.error";
+import { InMemoryRepository } from "../in-memory.repository";
 
 type StubEntityConstructor = {
   entityId: UUIDCustom;
