@@ -2,6 +2,7 @@ import { Entity } from "../../shared/domain/entity";
 import { EntityValidationError } from "../../shared/domain/validators/validation-error";
 import { ValueObject } from "../../shared/domain/value-object";
 import { UUIDCustom } from "../../shared/domain/value-objects/uuid.vo";
+import { CategoryFakeBuilder } from "./category-fake.builder";
 import { CategoryValidatorFactory } from "./category.validator";
 
 export type CategoryConstructorProps = {
@@ -38,7 +39,6 @@ export class Category extends Entity {
     return this.categoryId;
   }
 
-
   // factory method
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
@@ -72,6 +72,10 @@ export class Category extends Entity {
     if (!isValid) {
       throw new EntityValidationError(validator.errors);
     }
+  }
+
+  static fakeBuilder() {
+    return CategoryFakeBuilder;
   }
 
   toJSON() {
