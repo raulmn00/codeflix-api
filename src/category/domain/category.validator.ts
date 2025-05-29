@@ -20,10 +20,10 @@ export class CategoryRules {
 
   @IsBoolean()
   @IsNotEmpty()
-  isActive: boolean;
+  is_active: boolean;
 
-  constructor({ name, description, isActive }: Category) {
-    Object.assign(this, { name, description, isActive });
+  constructor({ name, description, is_active }: Category) {
+    Object.assign(this, { name, description, is_active });
   }
 }
 

@@ -6,16 +6,16 @@ type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
   // auto generated in entity
-  private _categoryId: PropOrFactory<UUIDCustom> | undefined = undefined;
+  private _category_id: PropOrFactory<UUIDCustom> | undefined = undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _name: PropOrFactory<string> = (_index) => this.chance.word();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _description: PropOrFactory<string | null> = (_index) =>
     this.chance.paragraph();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _isActive: PropOrFactory<boolean> = (_index) => true;
+  private _is_active: PropOrFactory<boolean> = (_index) => true;
   // auto generated in entity
-  private _createdAt: PropOrFactory<Date> | undefined = undefined;
+  private _created_at: PropOrFactory<Date> | undefined = undefined;
 
   private countObjs;
 
@@ -35,7 +35,7 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   withUUIDCustom(valueOrFactory: PropOrFactory<UUIDCustom>) {
-    this._categoryId = valueOrFactory;
+    this._category_id = valueOrFactory;
     return this;
   }
 
@@ -50,17 +50,17 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   activate() {
-    this._isActive = true;
+    this._is_active = true;
     return this;
   }
 
   deactivate() {
-    this._isActive = false;
+    this._is_active = false;
     return this;
   }
 
   withCreatedAt(valueOrFactory: PropOrFactory<Date>) {
-    this._createdAt = valueOrFactory;
+    this._created_at = valueOrFactory;
     return this;
   }
 
@@ -74,14 +74,14 @@ export class CategoryFakeBuilder<TBuild = any> {
       .fill(undefined)
       .map((_, index) => {
         const category = new Category({
-          categoryId: !this._categoryId
+          category_id: !this._category_id
             ? undefined
-            : this.callFactory(this._categoryId, index),
+            : this.callFactory(this._category_id, index),
           name: this.callFactory(this._name, index),
           description: this.callFactory(this._description, index),
-          isActive: this.callFactory(this._isActive, index),
-          ...(this._createdAt && {
-            createdAt: this.callFactory(this._createdAt, index),
+          is_active: this.callFactory(this._is_active, index),
+          ...(this._created_at && {
+            created_at: this.callFactory(this._created_at, index),
           }),
         });
         // category.validate();
@@ -90,8 +90,8 @@ export class CategoryFakeBuilder<TBuild = any> {
     return this.countObjs === 1 ? (categories[0] as any) : categories;
   }
 
-  get categoryId() {
-    return this.getValue("categoryId");
+  get category_id() {
+    return this.getValue("category_id");
   }
 
   get name() {
@@ -102,16 +102,16 @@ export class CategoryFakeBuilder<TBuild = any> {
     return this.getValue("description");
   }
 
-  get isActive() {
-    return this.getValue("isActive");
+  get is_active() {
+    return this.getValue("is_active");
   }
 
-  get createdAt() {
-    return this.getValue("createdAt");
+  get created_at() {
+    return this.getValue("created_at");
   }
 
   private getValue(prop: any) {
-    const optional = ["categoryId", "createdAt"];
+    const optional = ["category_id", "created_at"];
     const privateProp = `_${prop}` as keyof this;
     if (!this[privateProp] && optional.includes(prop)) {
       throw new Error(

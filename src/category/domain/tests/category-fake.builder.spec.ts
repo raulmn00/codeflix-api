@@ -14,13 +14,13 @@ describe("CategoryFakeBuilder Unit Tests", () => {
       const category = CategoryFakeBuilder.oneCategory().build();
 
       expect(category).toBeInstanceOf(Category);
-      expect(category.categoryId).toBeInstanceOf(UUIDCustom);
+      expect(category.category_id).toBeInstanceOf(UUIDCustom);
       expect(typeof category.name).toBe("string");
       expect(category.name.length).toBeGreaterThan(0);
       expect(typeof category.description).toBe("string");
       expect(category.description.length).toBeGreaterThan(0);
-      expect(category.isActive).toBe(true);
-      expect(category.createdAt).toBeInstanceOf(Date);
+      expect(category.is_active).toBe(true);
+      expect(category.created_at).toBeInstanceOf(Date);
     });
 
     test("should build category with custom name", () => {
@@ -55,7 +55,7 @@ describe("CategoryFakeBuilder Unit Tests", () => {
         .withUUIDCustom(customUUID)
         .build();
 
-      expect(category.categoryId).toBe(customUUID);
+      expect(category.category_id).toBe(customUUID);
     });
 
     test("should build category with custom createdAt", () => {
@@ -64,19 +64,19 @@ describe("CategoryFakeBuilder Unit Tests", () => {
         .withCreatedAt(customDate)
         .build();
 
-      expect(category.createdAt).toBe(customDate);
+      expect(category.created_at).toBe(customDate);
     });
 
     test("should build activated category", () => {
       const category = CategoryFakeBuilder.oneCategory().activate().build();
 
-      expect(category.isActive).toBe(true);
+      expect(category.is_active).toBe(true);
     });
 
     test("should build deactivated category", () => {
       const category = CategoryFakeBuilder.oneCategory().deactivate().build();
 
-      expect(category.isActive).toBe(false);
+      expect(category.is_active).toBe(false);
     });
 
     test("should build category with invalid name too long", () => {
@@ -111,13 +111,13 @@ describe("CategoryFakeBuilder Unit Tests", () => {
 
       categories.forEach((category) => {
         expect(category).toBeInstanceOf(Category);
-        expect(category.categoryId).toBeInstanceOf(UUIDCustom);
+        expect(category.category_id).toBeInstanceOf(UUIDCustom);
         expect(typeof category.name).toBe("string");
         expect(category.name.length).toBeGreaterThan(0);
         expect(typeof category.description).toBe("string");
         expect(category.description.length).toBeGreaterThan(0);
-        expect(category.isActive).toBe(true);
-        expect(category.createdAt).toBeInstanceOf(Date);
+        expect(category.is_active).toBe(true);
+        expect(category.created_at).toBeInstanceOf(Date);
       });
     });
 
@@ -175,7 +175,7 @@ describe("CategoryFakeBuilder Unit Tests", () => {
       expect(categories[1].description).toBe("Odd description");
     });
 
-    test("should apply factory function for isActive", () => {
+    test("should apply factory function for is_active", () => {
       const categories = CategoryFakeBuilder.manyCategories(3)
         .withName("Test")
         .withDescription("Test description")
@@ -183,7 +183,7 @@ describe("CategoryFakeBuilder Unit Tests", () => {
 
       // By default, all should be active
       categories.forEach((category) => {
-        expect(category.isActive).toBe(true);
+        expect(category.is_active).toBe(true);
       });
     });
 
@@ -193,8 +193,8 @@ describe("CategoryFakeBuilder Unit Tests", () => {
         .withUUIDCustom((index) => uuids[index])
         .build();
 
-      expect(categories[0].categoryId).toBe(uuids[0]);
-      expect(categories[1].categoryId).toBe(uuids[1]);
+      expect(categories[0].category_id).toBe(uuids[0]);
+      expect(categories[1].category_id).toBe(uuids[1]);
     });
 
     test("should apply factory function for createdAt", () => {
@@ -203,8 +203,8 @@ describe("CategoryFakeBuilder Unit Tests", () => {
         .withCreatedAt((index) => dates[index])
         .build();
 
-      expect(categories[0].createdAt).toBe(dates[0]);
-      expect(categories[1].createdAt).toBe(dates[1]);
+      expect(categories[0].created_at).toBe(dates[0]);
+      expect(categories[1].created_at).toBe(dates[1]);
     });
   });
 
@@ -224,24 +224,24 @@ describe("CategoryFakeBuilder Unit Tests", () => {
       expect(builder.description).toBe(customDescription);
     });
 
-    test("should get isActive value when activated", () => {
+    test("should get is_active value when activated", () => {
       const builder = CategoryFakeBuilder.oneCategory().activate();
 
-      expect(builder.isActive).toBe(true);
+      expect(builder.is_active).toBe(true);
     });
 
-    test("should get isActive value when deactivated", () => {
+    test("should get is_active value when deactivated", () => {
       const builder = CategoryFakeBuilder.oneCategory().deactivate();
 
-      expect(builder.isActive).toBe(false);
+      expect(builder.is_active).toBe(false);
     });
 
-    test("should get categoryId value", () => {
+    test("should get category_id value", () => {
       const customUUID = new UUIDCustom();
       const builder =
         CategoryFakeBuilder.oneCategory().withUUIDCustom(customUUID);
 
-      expect(builder.categoryId).toBe(customUUID);
+      expect(builder.category_id).toBe(customUUID);
     });
 
     test("should get createdAt value", () => {
@@ -249,22 +249,22 @@ describe("CategoryFakeBuilder Unit Tests", () => {
       const builder =
         CategoryFakeBuilder.oneCategory().withCreatedAt(customDate);
 
-      expect(builder.createdAt).toBe(customDate);
+      expect(builder.created_at).toBe(customDate);
     });
 
-    test("should throw error when trying to get categoryId without setting it", () => {
+    test("should throw error when trying to get category_id without setting it", () => {
       const builder = CategoryFakeBuilder.oneCategory();
 
-      expect(() => builder.categoryId).toThrow(
-        "Property categoryId not have a factory, use 'with' methods"
+      expect(() => builder.category_id).toThrow(
+        "Property category_id not have a factory, use 'with' methods"
       );
     });
 
     test("should throw error when trying to get createdAt without setting it", () => {
       const builder = CategoryFakeBuilder.oneCategory();
 
-      expect(() => builder.createdAt).toThrow(
-        "Property createdAt not have a factory, use 'with' methods"
+      expect(() => builder.created_at).toThrow(
+        "Property created_at not have a factory, use 'with' methods"
       );
     });
   });
@@ -282,20 +282,20 @@ describe("CategoryFakeBuilder Unit Tests", () => {
         .withCreatedAt(customDate)
         .build();
 
-      expect(category.categoryId).toBe(customUUID);
+      expect(category.category_id).toBe(customUUID);
       expect(category.name).toBe("Chained Name");
       expect(category.description).toBe("Chained Description");
-      expect(category.isActive).toBe(true);
-      expect(category.createdAt).toBe(customDate);
+      expect(category.is_active).toBe(true);
+      expect(category.created_at).toBe(customDate);
     });
 
-    test("should allow overriding isActive state", () => {
+    test("should allow overriding is_active state", () => {
       const category = CategoryFakeBuilder.oneCategory()
         .activate()
         .deactivate()
         .build();
 
-      expect(category.isActive).toBe(false);
+      expect(category.is_active).toBe(false);
     });
   });
 
@@ -320,15 +320,15 @@ describe("CategoryFakeBuilder Unit Tests", () => {
       const category1 = CategoryFakeBuilder.oneCategory().build();
       const category2 = CategoryFakeBuilder.oneCategory().build();
 
-      expect(category1.categoryId.id).not.toBe(category2.categoryId.id);
+      expect(category1.category_id.id).not.toBe(category2.category_id.id);
     });
     it("should throw error when any with methods is called", () => {
       const builder = CategoryFakeBuilder.oneCategory();
-      expect(() => builder.categoryId).toThrow(
-        "Property categoryId not have a factory, use 'with' methods"
+      expect(() => builder.category_id).toThrow(
+        "Property category_id not have a factory, use 'with' methods"
       );
-      expect(() => builder.createdAt).toThrow(
-        "Property createdAt not have a factory, use 'with' methods"
+      expect(() => builder.created_at).toThrow(
+        "Property created_at not have a factory, use 'with' methods"
       );
     });
   });

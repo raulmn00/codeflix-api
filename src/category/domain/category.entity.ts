@@ -6,37 +6,37 @@ import { CategoryFakeBuilder } from "./category-fake.builder";
 import { CategoryValidatorFactory } from "./category.validator";
 
 export type CategoryConstructorProps = {
-  categoryId?: UUIDCustom;
+  category_id?: UUIDCustom;
   name: string;
   description?: string | null;
-  isActive?: boolean;
-  createdAt?: Date;
+  is_active?: boolean;
+  created_at?: Date;
 };
 
 export type CategoryCreateCommand = {
   name: string;
   description?: string | null;
-  isActive?: boolean;
+  is_active?: boolean;
 };
 
 export class Category extends Entity {
-  categoryId: UUIDCustom;
+  category_id: UUIDCustom;
   name: string;
   description: string | null;
-  isActive: boolean;
-  createdAt: Date;
+  is_active: boolean;
+  created_at: Date;
 
   constructor(props: CategoryConstructorProps) {
     super();
-    this.categoryId = props.categoryId ?? new UUIDCustom();
+    this.category_id = props.category_id ?? new UUIDCustom();
     this.name = props.name;
     this.description = props.description ?? null;
-    this.isActive = props.isActive ?? true;
-    this.createdAt = props.createdAt ?? new Date();
+    this.is_active = props.is_active ?? true;
+    this.created_at = props.created_at ?? new Date();
   }
 
   getEntityId(): ValueObject {
-    return this.categoryId;
+    return this.category_id;
   }
 
   // factory method
@@ -57,11 +57,11 @@ export class Category extends Entity {
   }
 
   activate(): void {
-    this.isActive = true;
+    this.is_active = true;
   }
 
   deactivate(): void {
-    this.isActive = false;
+    this.is_active = false;
   }
 
   static validate(entity: Category) {
@@ -81,11 +81,11 @@ export class Category extends Entity {
   toJSON() {
     return {
       // pegando a propriedade id do value UUID
-      categoryId: this.categoryId.id,
+      category_id: this.category_id.id,
       name: this.name,
       description: this.description,
-      isActive: this.isActive,
-      createdAt: this.createdAt,
+      is_active: this.is_active,
+      created_at: this.created_at,
     };
   }
 }
